@@ -11,5 +11,8 @@
     "cloudflare-workers"
   ],
   "author": "sor4chi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^3.6.0"
+  }
 }

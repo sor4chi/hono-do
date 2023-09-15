@@ -42,7 +42,11 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
-  packages/hono-do: {}
+  packages/hono-do:
+    dependencies:
+      hono:
+        specifier: ^3.6.0
+        version: 3.6.0
 
 packages:
 
@@ -1043,6 +1047,11 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /hono@3.6.0:
+    resolution: {integrity: sha512-snkW8naO1WCrQvpAGE/du30Ek0h71gSM3g4RzzdPIB2LQnl12BEwZYH3s2Kssd6kXGORqHmpoyMBMLWtc9nzKQ==}
+    engines: {node: '>=16.0.0'}
+    dev: false
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
