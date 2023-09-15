@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "build": "tsc"
   },
   "keywords": [
     "hono",
