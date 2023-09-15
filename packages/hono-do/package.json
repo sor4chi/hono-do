@@ -12,6 +12,9 @@
   ],
   "author": "sor4chi",
   "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230904.0"
+  },
   "dependencies": {
     "hono": "^3.6.0"
   }
