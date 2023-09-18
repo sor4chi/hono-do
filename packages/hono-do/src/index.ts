@@ -34,3 +34,22 @@ export function generateHonoObject<
 
   return honoObject;
 }
+
+export async function defineState<T>(
+  storage: DurableObjectStorage,
+  key: string,
+  initialValue: T,
+): Promise<[() => Promise<T>, (value: T) => Promise<void>]> {
+  if (!(await storage.get(key))) {
+    await storage.put(key, initialValue);
+  }
+
+  return [
+    async () => {
+      return (await storage.get<T>(key)) || initialValue;
+    },
+    async (value: T) => {
+      await storage.put(key, value);
+    },
+  ];
+}
