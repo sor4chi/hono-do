@@ -22,5 +22,26 @@ module.exports = {
       },
     },
   },
+  rules: {
+    "import/order": [
+      "warn",
+      {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type",
+        ],
+        "newlines-between": "always",
+        pathGroupsExcludedImportTypes: ["builtin"],
+        alphabetize: { order: "asc", caseInsensitive: true },
+        pathGroups: [],
+      },
+    ],
+  },
   ignorePatterns: ["node_modules/", "dist/", ".eslintrc.*"],
 };
