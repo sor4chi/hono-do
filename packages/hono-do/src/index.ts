@@ -1,7 +1,6 @@
 import { Hono } from "hono";
 
 interface HonoObject {
-  state: DurableObjectState;
   app: Hono;
 }
 
