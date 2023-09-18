@@ -4,18 +4,17 @@ export const Counter = generateHonoObject("/counter", async (app, state) => {
   const [getValue, setValue] = await defineState(state.storage, "value", 0);
 
   app.post("/increment", async (c) => {
-    const newVal = 1 + (await getValue());
-    setValue(newVal);
-    return c.text(newVal.toString());
+    const newValue = await setValue((value) => value + 1);
+    return c.text(newValue.toString());
   });
 
   app.post("/decrement", async (c) => {
-    const newVal = -1 + (await getValue());
-    setValue(newVal);
-    return c.text(newVal.toString());
+    const newValue = await setValue((value) => value - 1);
+    return c.text(newValue.toString());
   });
 
   app.get("/", async (c) => {
-    return c.text((await getValue()).toString());
+    const currentValue = await getValue();
+    return c.text(currentValue.toString());
   });
 });
