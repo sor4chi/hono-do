@@ -1,13 +1,15 @@
-import { generateHonoObject } from "hono-do";
+import { defineState, generateHonoObject } from "hono-do";
 
-export const Chat = generateHonoObject("/chat", (app) => {
-  const messages: {
-    timestamp: string;
-    text: string;
-  }[] = [];
+export const Chat = generateHonoObject("/chat", async (app, state) => {
+  const [getMessages, setMessages] = await defineState<
+    {
+      timestamp: string;
+      text: string;
+    }[]
+  >(state.storage, "messages", []);
   const sessions = new Map<string, WebSocket>();
 
-  app.get("/messages", async (c) => c.json(messages));
+  app.get("/messages", async (c) => c.json(await getMessages()));
 
   app.get("/websocket", async (c) => {
     if (c.req.header("Upgrade") === "websocket") {
@@ -23,9 +25,10 @@ export const Chat = generateHonoObject("/chat", (app) => {
 
     sessions.set(clientId, server);
 
-    server.addEventListener("message", (msg) => {
+    server.addEventListener("message", async (msg) => {
       if (typeof msg.data !== "string") return;
-      messages.push(JSON.parse(msg.data));
+      const messages = await getMessages();
+      setMessages([...messages, JSON.parse(msg.data)]);
       broadcast(msg.data, clientId);
     });
 
