@@ -7,7 +7,11 @@ export const Chat = generateHonoObject("/chat", async (app, state) => {
       text: string;
     }[]
   >(state.storage, "messages", []);
-  const sessions = new Map<string, WebSocket>();
+  const [getSessions, setSessions] = await defineState(
+    state.storage,
+    "sessions",
+    new Map<string, WebSocket>(),
+  );
 
   app.get("/messages", async (c) => c.json(await getMessages()));
 
@@ -23,20 +27,20 @@ export const Chat = generateHonoObject("/chat", async (app, state) => {
     const clientId = Math.random().toString(36).slice(2);
     server.accept();
 
-    sessions.set(clientId, server);
+    (await getSessions()).set(clientId, server);
 
     server.addEventListener("message", async (msg) => {
       if (typeof msg.data !== "string") return;
       const messages = await getMessages();
       setMessages([...messages, JSON.parse(msg.data)]);
-      broadcast(msg.data, clientId);
+      await broadcast(msg.data, clientId);
     });
 
     return new Response(null, { status: 101, webSocket: client });
   }
 
-  function broadcast(message: string, senderClientId?: string) {
-    for (const [clientId, webSocket] of sessions.entries()) {
+  async function broadcast(message: string, senderClientId?: string) {
+    for (const [clientId, webSocket] of (await getSessions()).entries()) {
       if (clientId === senderClientId) {
         continue;
       }
@@ -44,7 +48,9 @@ export const Chat = generateHonoObject("/chat", async (app, state) => {
       try {
         webSocket.send(message);
       } catch (error) {
+        const sessions = await getSessions();
         sessions.delete(clientId);
+        await setSessions(sessions);
       }
     }
   }
