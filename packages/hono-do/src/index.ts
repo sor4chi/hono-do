@@ -14,7 +14,10 @@ export function generateHonoObject<
   BasePath extends string = "/",
 >(
   basePath: string,
-  cb: (app: Hono<E, S, BasePath>, state: DurableObjectState) => void,
+  cb: (
+    app: Hono<E, S, BasePath>,
+    state: DurableObjectState,
+  ) => void | Promise<void>,
 ) {
   const honoObject = function (
     this: HonoObject<E, S, BasePath>,
@@ -22,7 +25,9 @@ export function generateHonoObject<
   ) {
     const app = new Hono<E, S, BasePath>().basePath(basePath);
     this.app = app;
-    cb(app, state);
+    state.blockConcurrencyWhile(async () => {
+      await cb(app, state);
+    });
   };
 
   honoObject.prototype.fetch = function (
