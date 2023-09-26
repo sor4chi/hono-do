@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "build": "tsc"
+    "build": "tsc -p tsconfig.build.json"
   },
   "keywords": [
     "hono",
