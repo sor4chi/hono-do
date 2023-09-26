@@ -1,0 +1,32 @@
+{
+    "name": "@types/is-ci",
+    "version": "3.0.1",
+    "description": "TypeScript definitions for is-ci",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/is-ci",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Arne Schubert",
+            "url": "https://github.com/atd-schubert",
+            "githubUsername": "atd-schubert"
+        },
+        {
+            "name": "Florian Imdahl",
+            "url": "https://github.com/ffflorian",
+            "githubUsername": "ffflorian"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/is-ci"
+    },
+    "scripts": {},
+    "dependencies": {
+        "ci-info": "^3.1.0"
+    },
+    "typesPublisherContentHash": "1daa60e5f48704cbc25be6087c8fddb3f76bc0dbf421e2922b709195057a9aba",
+    "typeScriptVersion": "4.5"
+}
