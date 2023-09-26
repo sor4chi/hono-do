@@ -1,6 +1,7 @@
 {
   "name": "hono-do",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "A wrapper for Cloudflare Workers' Durable Object, designed for Hono.",
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,10 +14,21 @@
     "hono",
     "cloudflare-workers"
   ],
-  "author": "sor4chi",
+  "files": [
+    "dist"
+  ],
+  "author": "sor4chi <sorakawa0218@gmail.com> (https://github.com/sor4chi)",
   "license": "MIT",
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230904.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sor4chi/hono-do.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "dependencies": {
     "hono": "^3.6.0"

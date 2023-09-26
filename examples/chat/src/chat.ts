@@ -1,19 +1,21 @@
-import { defineState, generateHonoObject } from "hono-do";
+import { generateHonoObject } from "hono-do";
 
-export const Chat = generateHonoObject("/chat", async (app, state) => {
-  const [getMessages, setMessages] = await defineState<
-    {
-      timestamp: string;
-      text: string;
-    }[]
-  >(state.storage, "messages", []);
-  const [getSessions, setSessions] = await defineState(
-    state.storage,
-    "sessions",
-    new Map<string, WebSocket>(),
-  );
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
-  app.get("/messages", async (c) => c.json(await getMessages()));
+export const Chat = generateHonoObject("/chat", (app) => {
+  const messages: {
+    timestamp: string;
+    text: string;
+  }[] = [];
+  const sessions = new Map<string, WebSocket>();
+
+  app.get("/messages", async (c) => c.json(messages));
 
   app.get("/websocket", async (c) => {
     if (c.req.header("Upgrade") === "websocket") {
@@ -24,23 +26,22 @@ export const Chat = generateHonoObject("/chat", async (app, state) => {
 
   async function handleWebSocketUpgrade() {
     const [client, server] = Object.values(new WebSocketPair());
-    const clientId = Math.random().toString(36).slice(2);
+    const clientId = uuidv4();
     server.accept();
 
-    (await getSessions()).set(clientId, server);
+    sessions.set(clientId, server);
 
-    server.addEventListener("message", async (msg) => {
+    server.addEventListener("message", (msg) => {
       if (typeof msg.data !== "string") return;
-      const messages = await getMessages();
-      setMessages([...messages, JSON.parse(msg.data)]);
-      await broadcast(msg.data, clientId);
+      messages.push(JSON.parse(msg.data));
+      broadcast(msg.data, clientId);
     });
 
     return new Response(null, { status: 101, webSocket: client });
   }
 
-  async function broadcast(message: string, senderClientId?: string) {
-    for (const [clientId, webSocket] of (await getSessions()).entries()) {
+  function broadcast(message: string, senderClientId?: string) {
+    for (const [clientId, webSocket] of sessions.entries()) {
       if (clientId === senderClientId) {
         continue;
       }
@@ -48,9 +49,7 @@ export const Chat = generateHonoObject("/chat", async (app, state) => {
       try {
         webSocket.send(message);
       } catch (error) {
-        const sessions = await getSessions();
         sessions.delete(clientId);
-        await setSessions(sessions);
       }
     }
   }
