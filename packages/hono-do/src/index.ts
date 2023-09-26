@@ -79,7 +79,9 @@ export function generateHonoObject<
   ) {
     const app = new HonoWithWebsocket<E, S, BasePath>().basePath(basePath);
     this.app = app;
-    cb(app, state);
+    state.blockConcurrencyWhile(async () => {
+      await cb(app, state);
+    });
   };
 
   honoObject.prototype.fetch = function (

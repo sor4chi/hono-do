@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+
 import { Template } from "./template";
 
 const app = new Hono<{
