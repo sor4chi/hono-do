@@ -4,9 +4,11 @@
   "scripts": {
     "lint": "turbo lint",
     "format": "turbo format",
-    "build": "turbo build"
+    "build": "turbo build",
+    "ci:publish": "pnpm publish --no-git-checks -r"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "eslint-config-prettier": "^9.0.0",
