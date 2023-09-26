@@ -5,8 +5,7 @@
     "lint": "turbo lint",
     "format": "turbo format",
     "build": "turbo build",
-    "ci:publish": "pnpm publish --no-git-checks -r",
-    "ci:version": "pnpm changeset version"
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
