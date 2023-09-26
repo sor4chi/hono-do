@@ -5,7 +5,7 @@
     "lint": "turbo lint",
     "format": "turbo format",
     "build": "turbo build",
-    "ci:publish": "pnpm publish -r"
+    "ci:publish": "pnpm publish --no-git-checks -r"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
