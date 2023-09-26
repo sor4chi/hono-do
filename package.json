@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "turbo lint",
     "format": "turbo format",
-    "build": "turbo build"
+    "build": "turbo build",
+    "ci:publish": "pnpm publish -r"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
