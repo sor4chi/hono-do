@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
+    "lint": "eslint --fix --ext .ts,.tsx src",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts"
   },
