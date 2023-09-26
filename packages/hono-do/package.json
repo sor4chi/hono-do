@@ -1,7 +1,7 @@
 {
   "name": "hono-do",
   "version": "0.1.0",
-  "description": "A wrapper of Durable Object of Cloudflare Workers for Hono",
+  "description": "A wrapper for Cloudflare Workers' Durable Object, designed for Hono.",
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
