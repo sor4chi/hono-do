@@ -20,6 +20,7 @@
     "prettier": "^3.0.3",
     "turbo": "^1.10.13",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.5",
+    "wrangler": "^3.7.0"
   }
 }
