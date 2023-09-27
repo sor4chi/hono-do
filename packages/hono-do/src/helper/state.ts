@@ -1,8 +1,14 @@
+type Updater<T> = (prev: T) => T;
+
+const isUpdater = <T>(value: T | Updater<T>): value is Updater<T> => {
+  return typeof value === "function";
+};
+
 export async function defineState<T>(
   storage: DurableObjectStorage,
   key: string,
   initialValue: T,
-): Promise<[() => Promise<T>, (value: T | ((value: T) => T)) => Promise<T>]> {
+): Promise<[() => Promise<T>, (value: T | Updater<T>) => Promise<T>]> {
   if (!(await storage.get(key))) {
     await storage.put(key, initialValue);
   }
@@ -11,9 +17,9 @@ export async function defineState<T>(
     return (await storage.get<T>(key)) || initialValue;
   };
 
-  const set = async (value: T | ((value: T) => T)) => {
-    if (typeof value === "function") {
-      const newValue = (value as (value: T) => T)(await get());
+  const set = async (value: T | Updater<T>) => {
+    if (isUpdater(value)) {
+      const newValue = value(await get());
       await storage.put(key, newValue);
       return newValue;
     }
