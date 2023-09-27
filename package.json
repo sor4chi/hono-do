@@ -3,8 +3,11 @@
   "private": true,
   "scripts": {
     "lint": "turbo lint",
+    "lint:check": "turbo lint:check",
     "format": "turbo format",
+    "format:check": "turbo format:check",
     "build": "turbo build",
+    "test": "turbo test",
     "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
@@ -19,6 +22,8 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "^3.0.3",
     "turbo": "^1.10.13",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.5",
+    "wrangler": "^3.7.0"
   }
 }
