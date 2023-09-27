@@ -1,4 +1,4 @@
-type Updater<T> = (prev: T) => T;
+export type Updater<T> = (prev: T) => T;
 
 const isUpdater = <T>(value: T | Updater<T>): value is Updater<T> => {
   return typeof value === "function";
