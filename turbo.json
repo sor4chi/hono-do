@@ -9,6 +9,7 @@
     "lint": {},
     "lint:check": {},
     "format": {},
-    "format:check": {}
+    "format:check": {},
+    "test": {}
   }
 }
