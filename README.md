@@ -33,3 +33,11 @@ export const Counter = generateHonoObject("/counter", async (app, state) => {
 ```
 
 You want to find more? Check out the [examples](./examples)!
+
+## License
+
+[MIT](./LICENSE)
+
+## Contributing
+
+This project is open for contributions. Feel free to open an issue or a pull request!
