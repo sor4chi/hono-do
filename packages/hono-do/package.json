@@ -7,8 +7,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
+    "lint:check": "eslint --ext .ts,.tsx src",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "build": "tsc"
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest"
   },
   "keywords": [
     "hono",
