@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
+    "lint:check": "eslint --ext .ts,.tsx src",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts"
   },
