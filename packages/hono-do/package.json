@@ -20,6 +20,23 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./state": {
+      "types": "./dist/helper/state.d.ts",
+      "import": "./dist/helper/state.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "state": [
+        "./dist/helper/state.d.ts"
+      ]
+    }
+  },
   "author": "sor4chi <sorakawa0218@gmail.com> (https://github.com/sor4chi)",
   "license": "MIT",
   "devDependencies": {

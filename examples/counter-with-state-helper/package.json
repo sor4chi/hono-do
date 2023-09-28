@@ -1,0 +1,21 @@
+{
+  "name": "hono-do-example-counter-with-state-helper",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "lint": "eslint --fix --ext .ts,.tsx src",
+    "lint:check": "eslint --ext .ts,.tsx src",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^3.6.0",
+    "hono-do": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230821.0",
+    "wrangler": "^3.7.0"
+  }
+}
