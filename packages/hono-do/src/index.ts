@@ -1,5 +1,7 @@
 import { Env, Hono, Schema } from "hono";
 
+export interface HonoObjectVars {}
+
 interface HonoObject<
   E extends Env = Env,
   S extends Schema = Record<string, never>,
@@ -7,6 +9,7 @@ interface HonoObject<
 > {
   app: Hono<E, S, BasePath>;
   state: DurableObjectState;
+  vars: HonoObjectVars;
 }
 
 export function generateHonoObject<
@@ -18,8 +21,12 @@ export function generateHonoObject<
   cb: (
     app: Hono<E, S, BasePath>,
     state: DurableObjectState,
+    vars: HonoObjectVars,
   ) => void | Promise<void>,
-  alarm?: (state: DurableObjectState) => void | Promise<void>,
+  alarm?: (
+    state: DurableObjectState,
+    vars: HonoObjectVars,
+  ) => void | Promise<void>,
 ) {
   const honoObject = function (
     this: HonoObject<E, S, BasePath>,
@@ -28,8 +35,9 @@ export function generateHonoObject<
     const app = new Hono<E, S, BasePath>().basePath(basePath);
     this.app = app;
     this.state = state;
+    this.vars = {};
     state.blockConcurrencyWhile(async () => {
-      await cb(app, state);
+      await cb(app, state, this.vars);
     });
   };
 
@@ -44,7 +52,7 @@ export function generateHonoObject<
     this: HonoObject<E, S, BasePath>,
   ) {
     if (alarm) {
-      await alarm(this.state);
+      await alarm(this.state, this.vars);
     }
   };
 
