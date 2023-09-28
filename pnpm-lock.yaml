@@ -51,6 +51,22 @@ importers:
         specifier: ^3.7.0
         version: 3.8.0
 
+  examples/batcher:
+    dependencies:
+      hono:
+        specifier: ^3.6.0
+        version: 3.6.0
+      hono-do:
+        specifier: workspace:*
+        version: link:../../packages/hono-do
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20230821.0
+        version: 4.20230904.0
+      wrangler:
+        specifier: ^3.7.0
+        version: 3.8.0
+
   examples/chat:
     dependencies:
       hono:
