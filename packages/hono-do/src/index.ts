@@ -6,6 +6,7 @@ interface HonoObject<
   BasePath extends string = "/",
 > {
   app: Hono<E, S, BasePath>;
+  state: DurableObjectState;
 }
 
 export function generateHonoObject<
@@ -18,6 +19,7 @@ export function generateHonoObject<
     app: Hono<E, S, BasePath>,
     state: DurableObjectState,
   ) => void | Promise<void>,
+  alarm?: (state: DurableObjectState) => void | Promise<void>,
 ) {
   const honoObject = function (
     this: HonoObject<E, S, BasePath>,
@@ -25,6 +27,7 @@ export function generateHonoObject<
   ) {
     const app = new Hono<E, S, BasePath>().basePath(basePath);
     this.app = app;
+    this.state = state;
     state.blockConcurrencyWhile(async () => {
       await cb(app, state);
     });
@@ -35,6 +38,14 @@ export function generateHonoObject<
     request: Request,
   ) {
     return this.app.fetch(request);
+  };
+
+  honoObject.prototype.alarm = async function (
+    this: HonoObject<E, S, BasePath>,
+  ) {
+    if (alarm) {
+      await alarm(this.state);
+    }
   };
 
   return honoObject;
