@@ -1,0 +1,9 @@
+name = "batcher"
+compatibility_date = "2023-01-01"
+
+[durable_objects]
+bindings = [{ name = "BATCHER", class_name = "Batcher" }]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Batcher"]
