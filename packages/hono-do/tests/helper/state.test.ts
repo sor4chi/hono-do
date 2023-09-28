@@ -8,6 +8,7 @@ describe("defineState", () => {
     storage = {
       get: vi.fn(),
       put: vi.fn(),
+      delete: vi.fn(),
     };
   });
 
@@ -16,12 +17,13 @@ describe("defineState", () => {
   });
 
   it("set infered type correctly", async () => {
-    const [get, set] = await defineState(storage, "key", "value");
+    const [get, set, del] = await defineState(storage, "key", "value");
 
     expectTypeOf(get).toEqualTypeOf<() => Promise<string>>();
     expectTypeOf(set).toEqualTypeOf<
       (value: string | Updater<string>) => Promise<string>
     >();
+    expectTypeOf(del).toEqualTypeOf<() => Promise<void>>();
   });
 
   it("set complex type correctly", async () => {
@@ -77,5 +79,12 @@ describe("defineState", () => {
 
     await set((prev) => `${prev} + ${prev}`);
     expect(storage.put).toBeCalledWith("key", "value + value");
+  });
+
+  it("should work deleter", async () => {
+    const [_, __, del] = await defineState(storage, "key", "value");
+
+    await del();
+    expect(storage.delete).toBeCalledWith("key");
   });
 });
