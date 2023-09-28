@@ -4,27 +4,33 @@ import { generateHonoObject } from "hono-do";
 
 const SECONDS = 1000;
 
+declare module "hono-do" {
+  interface HonoObjectVars {
+    count: number;
+  }
+}
+
 export const Batcher = generateHonoObject(
   "/batcher",
-  async (app, state) => {
+  async (app, state, vars) => {
     const { storage } = state;
+    const vals = await storage.list({ reverse: true, limit: 1 });
+    vars.count = vals.size === 0 ? 0 : parseInt(vals.keys().next().value);
 
     app.post("/", async (c) => {
-      let count = (await storage.get<number>("count")) || 0;
-      await storage.put("count", (++count).toString());
+      vars.count++;
 
       const currentAlarm = await storage.getAlarm();
       if (currentAlarm == null) {
         await storage.setAlarm(Date.now() + 10 * SECONDS);
       }
 
-      await storage.put(count.toString(), await c.req.text());
-      return c.json({ queued: count });
+      await storage.put(vars.count.toString(), await c.req.text());
+      return c.json({ queued: vars.count });
     });
   },
-  async (state) => {
+  async (state, vars) => {
     const { storage } = state;
-    await storage.delete("count");
     const vals = await storage.list();
     // await fetch("http://example.com/some-upstream-service", {
     //   method: "POST",
@@ -32,5 +38,6 @@ export const Batcher = generateHonoObject(
     // });
     console.log(Array.from(vals.values()));
     await storage.deleteAll();
+    vars.count = 0;
   },
 );
