@@ -29,15 +29,14 @@ export const Batcher = generateHonoObject(
       return c.json({ queued: vars.count });
     });
   },
-  async (state, vars) => {
-    const { storage } = state;
-    const vals = await storage.list();
-    // await fetch("http://example.com/some-upstream-service", {
-    //   method: "POST",
-    //   body: Array.from(vals.values()),
-    // });
-    console.log(Array.from(vals.values()));
-    await storage.deleteAll();
-    vars.count = 0;
-  },
-);
+).alarm(async (state, vars) => {
+  const { storage } = state;
+  const vals = await storage.list();
+  // await fetch("http://example.com/some-upstream-service", {
+  //   method: "POST",
+  //   body: Array.from(vals.values()),
+  // });
+  console.log(Array.from(vals.values()));
+  await storage.deleteAll();
+  vars.count = 0;
+});
