@@ -54,21 +54,21 @@ export function generateHonoObject<
     ) {
       await alarm(this.state, this.vars);
     };
-  }
-
-  honoObject.alarm = function (
-    cb: (
-      state: DurableObjectState,
-      vars: HonoObjectVars,
-    ) => void | Promise<void>,
-  ) {
-    honoObject.prototype.alarm = async function (
-      this: HonoObject<E, S, BasePath>,
+  } else {
+    honoObject.alarm = function (
+      cb: (
+        state: DurableObjectState,
+        vars: HonoObjectVars,
+      ) => void | Promise<void>,
     ) {
-      await cb(this.state, this.vars);
+      honoObject.prototype.alarm = async function (
+        this: HonoObject<E, S, BasePath>,
+      ) {
+        await cb(this.state, this.vars);
+      };
+      return honoObject;
     };
-    return honoObject;
-  };
+  }
 
   return honoObject;
 }
