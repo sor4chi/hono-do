@@ -5,6 +5,7 @@ export const Template = /*html*/ `
     <p>Current value: <span id="value"></span></p>
     <button id="increment">Increment</button>
     <button id="decrement">Decrement</button>
+    <button id="reset">Reset</button>
     <script>
       const value = document.getElementById("value");
       const increment = document.getElementById("increment");
@@ -19,6 +20,10 @@ export const Template = /*html*/ `
       })
       decrement.addEventListener("click", async () => {
         await fetch("/counter/decrement", { method: "POST" });
+        await updateValue();
+      })
+      reset.addEventListener("click", async () => {
+        await fetch("/counter", { method: "DELETE" });
         await updateValue();
       })
       updateValue();
