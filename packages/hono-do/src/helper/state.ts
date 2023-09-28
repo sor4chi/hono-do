@@ -8,7 +8,9 @@ export async function defineState<T>(
   storage: DurableObjectStorage,
   key: string,
   initialValue: T,
-): Promise<[() => Promise<T>, (value: T | Updater<T>) => Promise<T>]> {
+): Promise<
+  [() => Promise<T>, (value: T | Updater<T>) => Promise<T>, () => Promise<void>]
+> {
   if (!(await storage.get(key))) {
     await storage.put(key, initialValue);
   }
@@ -27,5 +29,9 @@ export async function defineState<T>(
     return value;
   };
 
-  return [get, set];
+  const del = async () => {
+    await storage.delete(key);
+  };
+
+  return [get, set, del];
 }
