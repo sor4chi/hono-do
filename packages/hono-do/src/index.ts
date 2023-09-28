@@ -48,12 +48,26 @@ export function generateHonoObject<
     return this.app.fetch(request);
   };
 
-  honoObject.prototype.alarm = async function (
-    this: HonoObject<E, S, BasePath>,
-  ) {
-    if (alarm) {
+  if (alarm !== undefined) {
+    honoObject.prototype.alarm = async function (
+      this: HonoObject<E, S, BasePath>,
+    ) {
       await alarm(this.state, this.vars);
-    }
+    };
+  }
+
+  honoObject.alarm = function (
+    cb: (
+      state: DurableObjectState,
+      vars: HonoObjectVars,
+    ) => void | Promise<void>,
+  ) {
+    honoObject.prototype.alarm = async function (
+      this: HonoObject<E, S, BasePath>,
+    ) {
+      await cb(this.state, this.vars);
+    };
+    return honoObject;
   };
 
   return honoObject;
