@@ -32,11 +32,7 @@ export const Batcher = generateHonoObject(
 ).alarm(async (state, vars) => {
   const { storage } = state;
   const vals = await storage.list();
-  // await fetch("http://example.com/some-upstream-service", {
-  //   method: "POST",
-  //   body: Array.from(vals.values()),
-  // });
-  console.log(Array.from(vals.values()));
+  console.log(Array.from(vals.values())); // eg: POST other upstream service
   await storage.deleteAll();
   vars.count = 0;
 });
