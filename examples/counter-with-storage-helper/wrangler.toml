@@ -1,4 +1,4 @@
-name = "counter-with-state-helper"
+name = "counter-with-storage-helper"
 compatibility_date = "2023-01-01"
 
 [durable_objects]
