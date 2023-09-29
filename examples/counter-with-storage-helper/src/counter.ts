@@ -1,10 +1,10 @@
 import { generateHonoObject } from "hono-do";
-import { defineState } from "hono-do/state";
+import { defineStorage } from "hono-do/storage";
 
 export const Counter = generateHonoObject(
   "/counter",
   async (app, { storage }) => {
-    const [getValue, setValue, delValue] = await defineState(
+    const [getValue, setValue, delValue] = await defineStorage(
       storage,
       "value",
       0,

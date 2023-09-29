@@ -99,7 +99,7 @@ importers:
         specifier: ^3.7.0
         version: 3.8.0
 
-  examples/counter-with-state-helper:
+  examples/counter-with-storage-helper:
     dependencies:
       hono:
         specifier: ^3.6.0

@@ -1,5 +1,5 @@
 {
-  "name": "hono-do-example-counter-with-state-helper",
+  "name": "hono-do-example-counter-with-storage-helper",
   "private": true,
   "version": "0.0.0",
   "scripts": {

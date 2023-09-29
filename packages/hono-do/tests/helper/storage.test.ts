@@ -1,6 +1,6 @@
-import { Updater, defineState } from "../../src/helper/state";
+import { Updater, defineStorage } from "../../src/helper/storage";
 
-describe("defineState", () => {
+describe("defineStorage", () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let storage: any;
 
@@ -17,7 +17,7 @@ describe("defineState", () => {
   });
 
   it("set infered type correctly", async () => {
-    const [get, set, del] = await defineState(storage, "key", "value");
+    const [get, set, del] = await defineStorage(storage, "key", "value");
 
     expectTypeOf(get).toEqualTypeOf<() => Promise<string>>();
     expectTypeOf(set).toEqualTypeOf<
@@ -40,7 +40,7 @@ describe("defineState", () => {
           message: string;
         };
 
-    const [get, set] = await defineState<ComplexType>(storage, "key", {
+    const [get, set] = await defineStorage<ComplexType>(storage, "key", {
       status: "success",
       data: {
         foo: "foo",
@@ -60,7 +60,7 @@ describe("defineState", () => {
   });
 
   it("should work geter", async () => {
-    const [get] = await defineState(storage, "key", "value");
+    const [get] = await defineStorage(storage, "key", "value");
 
     expect(await get()).toBe("value");
     expect(storage.get).toBeCalledWith("key");
@@ -68,21 +68,21 @@ describe("defineState", () => {
   });
 
   it("should work setter (value)", async () => {
-    const [_, set] = await defineState(storage, "key", "value");
+    const [_, set] = await defineStorage(storage, "key", "value");
 
     await set("new value");
     expect(storage.put).toBeCalledWith("key", "new value");
   });
 
   it("should work setter (updater)", async () => {
-    const [_, set] = await defineState(storage, "key", "value");
+    const [_, set] = await defineStorage(storage, "key", "value");
 
     await set((prev) => `${prev} + ${prev}`);
     expect(storage.put).toBeCalledWith("key", "value + value");
   });
 
   it("should work deleter", async () => {
-    const [_, __, del] = await defineState(storage, "key", "value");
+    const [_, __, del] = await defineStorage(storage, "key", "value");
 
     await del();
     expect(storage.delete).toBeCalledWith("key");
