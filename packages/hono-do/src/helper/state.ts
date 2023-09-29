@@ -4,7 +4,7 @@ const isUpdater = <T>(value: T | Updater<T>): value is Updater<T> => {
   return typeof value === "function";
 };
 
-export async function defineState<T>(
+export async function defineStorage<T>(
   storage: DurableObjectStorage,
   key: string,
   initialValue: T,
