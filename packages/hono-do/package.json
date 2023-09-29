@@ -25,15 +25,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./state": {
-      "types": "./dist/helper/state.d.ts",
-      "import": "./dist/helper/state.js"
+    "./storage": {
+      "types": "./dist/helper/storage.d.ts",
+      "import": "./dist/helper/storage.js"
     }
   },
   "typesVersions": {
     "*": {
-      "state": [
-        "./dist/helper/state.d.ts"
+      "storage": [
+        "./dist/helper/storage.d.ts"
       ]
     }
   },

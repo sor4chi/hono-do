@@ -2,12 +2,12 @@
 "hono-do": minor
 ---
 
-Implement storage type-safe state helper as sub package
+Implement storage helper as sub package
 
 You can use `state.storage` type-safely like hooks in React.
 
 ```ts
-import { defineStorage } from "hono-do/state";
+import { defineStorage } from "hono-do/storage";
 
 export const Counter = generateHonoObject(
   "/counter",

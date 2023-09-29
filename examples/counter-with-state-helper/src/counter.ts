@@ -1,5 +1,5 @@
 import { generateHonoObject } from "hono-do";
-import { defineStorage } from "hono-do/state";
+import { defineStorage } from "hono-do/storage";
 
 export const Counter = generateHonoObject(
   "/counter",

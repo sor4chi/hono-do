@@ -1,4 +1,4 @@
-import { Updater, defineStorage } from "../../src/helper/state";
+import { Updater, defineStorage } from "../../src/helper/storage";
 
 describe("defineStorage", () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
