@@ -1,5 +1,27 @@
 # hono-do
 
+## 0.2.1
+
+### Patch Changes
+
+- [#19](https://github.com/sor4chi/hono-do/pull/19) [`9722471`](https://github.com/sor4chi/hono-do/commit/9722471232447d56aa0fd60ac052fca2b30fb57d) Thanks [@sor4chi](https://github.com/sor4chi)! - Fixed an issue where the `BasePath` type in `generateHonoObject` did not inherit the basePath of the first argument.
+
+  ```ts
+  // Before
+  generateHonoObject("/foo", (app) => {
+    app.get("/bar", (c) => {
+      c; // $ExpectType Context<Env, "/bar", {}>
+    });
+  });
+
+  // After
+  generateHonoObject("/foo", (app) => {
+    app.get("/bar", (c) => {
+      c; // $ExpectType Context<Env, "/foo/bar", {}>
+    });
+  });
+  ```
+
 ## 0.2.0
 
 ### Minor Changes
