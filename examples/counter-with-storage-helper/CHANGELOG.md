@@ -1,5 +1,12 @@
 # hono-do-example-counter-with-storage-helper
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`9722471`](https://github.com/sor4chi/hono-do/commit/9722471232447d56aa0fd60ac052fca2b30fb57d)]:
+  - hono-do@0.2.1
+
 ## 0.0.1
 
 ### Patch Changes
