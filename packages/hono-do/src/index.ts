@@ -17,7 +17,7 @@ export function generateHonoObject<
   S extends Schema = Record<string, never>,
   BasePath extends string = "/",
 >(
-  basePath: string,
+  basePath: BasePath,
   cb: (
     app: Hono<E, S, BasePath>,
     state: DurableObjectState,
