@@ -1,5 +1,5 @@
 ---
-"hono-do": minor
+"hono-do": major
 ---
 
 Support for three handlers about [Hibernation Websocket API](https://developers.cloudflare.com/durable-objects/learning/websockets/#websocket-hibernation).
