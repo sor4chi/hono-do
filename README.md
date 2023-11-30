@@ -33,8 +33,8 @@ You want to find more? Check out the [examples](./examples)!
 
 ## Support
 
-- [x] [`alarm` API](https://developers.cloudflare.com/durable-objects/api/alarms/)
-- [x] [`Hibernation Websocket API`](https://developers.cloudflare.com/durable-objects/learning/websockets/#websocket-hibernation)
+- [x] [alarm API](https://developers.cloudflare.com/durable-objects/api/alarms/)
+- [x] [Hibernation Websocket API](https://developers.cloudflare.com/durable-objects/learning/websockets/#websocket-hibernation)
 
 ## License
 
