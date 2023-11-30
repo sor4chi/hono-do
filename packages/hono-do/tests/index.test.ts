@@ -3,6 +3,7 @@ import { join } from "path";
 import { unstable_dev } from "wrangler";
 
 import { generateHonoObject } from "../src";
+import { Errors } from "../src/error";
 
 import type { UnstableDevWorker } from "wrangler";
 
@@ -51,6 +52,17 @@ describe("generateHonoObject", () => {
       .webSocketMessage(async () => {})
       .webSocketClose(async () => {})
       .webSocketError(async () => {});
+  });
+
+  it("should error when multiple handler set to same Hono Object", async () => {
+    const DO = generateHonoObject("/", () => {});
+    DO.webSocketMessage(async () => {});
+    expect(() => DO.alarm(async () => {})).not.toThrowError(
+      Errors.handlerAlreadySet("alarm"),
+    );
+    expect(() => DO.webSocketMessage(async () => {})).toThrowError(
+      Errors.handlerAlreadySet("webSocketMessage"),
+    );
   });
 });
 
