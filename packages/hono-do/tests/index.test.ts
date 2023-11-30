@@ -28,6 +28,15 @@ describe("generateHonoObject", () => {
     });
   });
 
+  it("should work with type-safe base path", async () => {
+    generateHonoObject("/:hogeId", (app) => {
+      app.get("/:fugaId", async (c) => {
+        expectTypeOf(c.req.param("hogeId")).toEqualTypeOf<string>();
+        expectTypeOf(c.req.param("hogeId")).toEqualTypeOf<string>();
+      });
+    });
+  });
+
   it("should work with handler chain by flat way", async () => {
     const DO = generateHonoObject("/", () => {});
     DO.alarm(async () => {});
