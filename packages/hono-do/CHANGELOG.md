@@ -1,5 +1,81 @@
 # hono-do
 
+## 1.0.0
+
+### Major Changes
+
+- [#21](https://github.com/sor4chi/hono-do/pull/21) [`f659d6c`](https://github.com/sor4chi/hono-do/commit/f659d6ce48e0c77f785a813faf1585d8f0b216ec) Thanks [@sor4chi](https://github.com/sor4chi)! - Support for three handlers about [Hibernation Websocket API](https://developers.cloudflare.com/durable-objects/learning/websockets/#websocket-hibernation).
+
+  - `webSocketMessage` handler
+  - `webSocketClose` handler
+  - `webSocketError` handler
+
+  You can use these handlers same way as `alarm` handler in Hono DO.
+
+  ## Usage
+
+  ### Flat way
+
+  ```ts
+  const DO = generateHonoObject("/", () => {});
+  DO.alarm(async () => {});
+  DO.webSocketMessage(async () => {});
+  DO.webSocketClose(async () => {});
+  DO.webSocketError(async () => {});
+  ```
+
+  ### Chaining way
+
+  ```ts
+  generateHonoObject("/", () => {})
+    .alarm(async () => {})
+    .webSocketMessage(async () => {})
+    .webSocketClose(async () => {})
+    .webSocketError(async () => {});
+  ```
+
+  ### Argument way
+
+  ```ts
+  generateHonoObject("/", () => {}, {
+    alarm: async () => {},
+    webSocketMessage: async () => {},
+    webSocketClose: async () => {},
+    webSocketError: async () => {},
+  });
+  ```
+
+  Take care for registering multiple handlers for same event.
+  If you register so, you will get an error.
+
+  ## Breaking changes
+
+  Changed the interface of how to configure `AlarmHandler` in `generateHonoObject` argument.
+
+  ### Before
+
+  ```ts
+  generateHonoObject(
+    "/",
+    () => {},
+    () => {
+      console.log("alarm");
+    },
+  );
+  ```
+
+  ### After
+
+  ```ts
+  generateHonoObject("/", () => {}, {
+    alarm: () => {
+      console.log("alarm");
+    },
+  });
+  ```
+
+  This is because we want to support many fields of Durable Object as handlers.
+
 ## 0.2.1
 
 ### Patch Changes
