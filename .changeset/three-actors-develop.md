@@ -32,5 +32,16 @@ generateHonoObject("/", () => {})
     .webSocketError(async () => {});
 ```
 
+### Argument way
+
+```ts
+generateHonoObject("/", () => {}, {
+    alarm: async () => {},
+    webSocketMessage: async () => {},
+    webSocketClose: async () => {},
+    webSocketError: async () => {},
+});
+```
+
 Take care for registering multiple handlers for same event.
 If you register so, you will get an error.

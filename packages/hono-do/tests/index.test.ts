@@ -64,6 +64,15 @@ describe("generateHonoObject", () => {
       Errors.handlerAlreadySet("webSocketMessage"),
     );
   });
+
+  it("should error when multiple handler set to same Hono Object, with other way", async () => {
+    const DO = generateHonoObject("/", () => {}, {
+      alarm: async () => {},
+    });
+    expect(() => DO.alarm(async () => {})).toThrowError(
+      Errors.handlerAlreadySet("alarm"),
+    );
+  });
 });
 
 describe("Worker", () => {
