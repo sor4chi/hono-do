@@ -73,37 +73,30 @@ export function generateHonoObject<
     _handlers.webSocketError?.(...args, this.state, this.vars);
   };
 
-  const isCalledMap = new Map<string, boolean>();
-
   honoObject.alarm = function (handler: AlarmHandler) {
-    const name = "alarm";
-    if (isCalledMap.get(name)) throw Errors.handlerAlreadySet(name);
+    if (_handlers.alarm) throw Errors.handlerAlreadySet("alarm");
     _handlers.alarm = handler;
-    isCalledMap.set(name, true);
     return honoObject;
   };
 
   honoObject.webSocketMessage = function (handler: WebSocketMessageHandler) {
-    const name = "webSocketMessage";
-    if (isCalledMap.get(name)) throw Errors.handlerAlreadySet(name);
+    if (_handlers.webSocketMessage)
+      throw Errors.handlerAlreadySet("webSocketMessage");
     _handlers.webSocketMessage = handler;
-    isCalledMap.set(name, true);
     return honoObject;
   };
 
   honoObject.webSocketClose = function (handler: WebSocketCloseHandler) {
-    const name = "webSocketClose";
-    if (isCalledMap.get(name)) throw Errors.handlerAlreadySet(name);
+    if (_handlers.webSocketClose)
+      throw Errors.handlerAlreadySet("webSocketClose");
     _handlers.webSocketClose = handler;
-    isCalledMap.set(name, true);
     return honoObject;
   };
 
   honoObject.webSocketError = function (handler: WebSocketErrorHandler) {
-    const name = "webSocketError";
-    if (isCalledMap.get(name)) throw Errors.handlerAlreadySet(name);
+    if (_handlers.webSocketError)
+      throw Errors.handlerAlreadySet("webSocketError");
     _handlers.webSocketError = handler;
-    isCalledMap.set(name, true);
     return honoObject;
   };
 
