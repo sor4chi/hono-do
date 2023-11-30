@@ -72,4 +72,31 @@ describe("Worker", () => {
       expect(await resp.text()).toBe("1");
     });
   });
+
+  describe("Alarm", () => {
+    let worker: UnstableDevWorker;
+
+    beforeEach(async () => {
+      worker = await unstable_dev(join(__dirname, "fixtures/alarm/index.ts"), {
+        experimental: { disableExperimentalWarning: true },
+      });
+    });
+
+    afterEach(async () => {
+      await worker.stop();
+    });
+
+    it("should work alarm handler", async () => {
+      const resp = await worker.fetch("/alarm", { method: "POST" });
+      expect(resp.status).toBe(200);
+      expect(await resp.json()).toStrictEqual({ queued: true });
+
+      // alarm set "Hello, Hono DO!" to vars.message after 100ms
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      const resp2 = await worker.fetch("/alarm");
+      expect(resp2.status).toBe(200);
+      expect(await resp2.text()).toBe("Hello, Hono DO!");
+    });
+  });
 });
