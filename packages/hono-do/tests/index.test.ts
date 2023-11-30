@@ -27,6 +27,22 @@ describe("generateHonoObject", () => {
       });
     });
   });
+
+  it("should work with handler chain by flat way", async () => {
+    const DO = generateHonoObject("/", () => {});
+    DO.alarm(async () => {});
+    DO.webSocketMessage(async () => {});
+    DO.webSocketClose(async () => {});
+    DO.webSocketError(async () => {});
+  });
+
+  it("should work with handler chain by chain way", async () => {
+    generateHonoObject("/", () => {})
+      .alarm(async () => {})
+      .webSocketMessage(async () => {})
+      .webSocketClose(async () => {})
+      .webSocketError(async () => {});
+  });
 });
 
 describe("Worker", () => {
