@@ -45,3 +45,27 @@ generateHonoObject("/", () => {}, {
 
 Take care for registering multiple handlers for same event.
 If you register so, you will get an error.
+
+## Breaking changes
+
+Changed the interface of how to configure `AlarmHandler` in `generateHonoObject` argument.
+
+### Before
+
+```ts
+generateHonoObject("/", () => {}, () => {
+    console.log("alarm");
+});
+```
+
+### After
+
+```ts
+generateHonoObject("/", () => {}, {
+    alarm: () => {
+        console.log("alarm");
+    },
+});
+```
+
+This is because we want to support many fields of Durable Object as handlers.
