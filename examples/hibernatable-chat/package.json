@@ -1,7 +1,7 @@
 {
   "name": "hono-do-example-hibernatable-chat",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
     "lint:check": "eslint --ext .ts,.tsx src",
