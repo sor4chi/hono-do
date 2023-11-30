@@ -1,0 +1,9 @@
+name = "chat"
+compatibility_date = "2023-01-01"
+
+[durable_objects]
+bindings = [{ name = "CHAT", class_name = "Chat" }]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Chat"]
