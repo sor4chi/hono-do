@@ -2,12 +2,6 @@ import { Hono } from "hono";
 
 import { generateHonoObject } from "../../../src";
 
-declare module "../../../src" {
-  interface HonoObjectVars {
-    message: string;
-  }
-}
-
 const app = new Hono<{
   Bindings: {
     ALARM: DurableObjectNamespace;
@@ -33,10 +27,24 @@ export const Alarm = generateHonoObject(
     });
 
     app.get("/", async (c) => {
+      // NOTE:
+      // ```ts
+      // declare module "hono-do" {
+      //   interface HonoObjectVars {
+      //     message: string;
+      //   }
+      // }
+      // ```
+      //
+      // This will resolve the type error, but this code effects other files. so I don't use this.
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       return c.text(vars.message);
     });
   },
 ).alarm(async (state, vars) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   vars.message = "Hello, Hono DO!";
 });
 
