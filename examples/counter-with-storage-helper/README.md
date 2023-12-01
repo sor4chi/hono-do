@@ -1,8 +1,9 @@
-```
-npm install
-npm run dev
-```
+# Hono DO Counter (with Storage Helper)
+
+This example is a counter app with storage helper.
+[Counter example](../counter)'s rewrite with storage helper.
 
 ```
-npm run deploy
+pnpm install
+pnpm dev
 ```

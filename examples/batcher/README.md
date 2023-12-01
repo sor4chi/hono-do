@@ -1,8 +1,10 @@
-```
-npm install
-npm run dev
-```
+# Hono DO Batcher
+
+This example is a batcher using Durable Object's Alarm API.
+The code is based on [Cloudflare's Alarm example](https://developers.cloudflare.com/durable-objects/api/alarms-in-durable-objects).
 
 ```
-npm run deploy
+pnpm install
+pnpm dev
 ```
+

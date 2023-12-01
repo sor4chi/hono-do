@@ -1,8 +1,9 @@
-```
-npm install
-npm run dev
-```
+# Hono DO Chat (hibernatable)
+
+This example is a hibernatable chat app.
+The code using [Hibernate Websocket API](https://developers.cloudflare.com/durable-objects/learning/websockets/#websocket-hibernation) for hibernation of Durable Objects.
 
 ```
-npm run deploy
+pnpm install
+pnpm dev
 ```
