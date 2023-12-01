@@ -99,6 +99,17 @@ export function generateHonoObject<
     return honoObject;
   };
 
+  honoObject.byName = function (namespace, name) {
+    return async (c) => {
+      const target = c.env[namespace] as DurableObjectNamespace | undefined;
+      if (target == null) throw Errors.namespaceNotSet(namespace);
+      const _name = typeof name === "function" ? await name(c) : name;
+      const id = target.idFromName(_name);
+      const obj = target.get(id);
+      return obj.fetch(c.req.raw);
+    };
+  };
+
   return honoObject;
 }
 

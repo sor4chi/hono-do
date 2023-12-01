@@ -1,4 +1,4 @@
-import { Env, Hono, Schema } from "hono";
+import { Context, Env, Hono, MiddlewareHandler, Schema } from "hono";
 
 import { MergeArray } from "./utils";
 
@@ -30,6 +30,15 @@ export interface HonoObject<
   webSocketError: (
     handler: WebSocketErrorHandler,
   ) => HonoObject<E, S, BasePath>;
+  byName: <
+    T extends string,
+    E extends {
+      Bindings: { [K in T]: DurableObjectNamespace };
+    },
+  >(
+    namespace: T,
+    name: string | ((c: Context<E, BasePath>) => string | Promise<string>),
+  ) => MiddlewareHandler;
 }
 
 export type AlarmHandler = (

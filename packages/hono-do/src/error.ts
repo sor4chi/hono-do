@@ -8,4 +8,6 @@ export class HonoDOError extends Error {
 export const Errors = {
   handlerAlreadySet: (handlerName: string) =>
     new HonoDOError(`Handler ${handlerName} already set`),
+  namespaceNotSet: (namespace: string) =>
+    new HonoDOError(`Namespace ${namespace} not set`),
 };
