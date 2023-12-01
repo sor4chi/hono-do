@@ -151,4 +151,58 @@ describe("Worker", () => {
       }
     });
   });
+
+  describe("ByName Proxy", () => {
+    describe("Simple", () => {
+      let worker: UnstableDevWorker;
+
+      beforeEach(async () => {
+        worker = await unstable_dev(
+          join(__dirname, "fixtures/by-name-proxy-simple/index.ts"),
+          {
+            experimental: { disableExperimentalWarning: true },
+          },
+        );
+      });
+
+      afterEach(async () => {
+        await worker.stop();
+      });
+
+      it("should work with byName", async () => {
+        const resp = await worker.fetch("/simple");
+        expect(resp.status).toBe(200);
+        expect(await resp.text()).toBe("Hello, Hono DO!");
+      });
+    });
+
+    describe("Dynamic", () => {
+      let worker: UnstableDevWorker;
+
+      beforeEach(async () => {
+        worker = await unstable_dev(
+          join(__dirname, "fixtures/by-name-proxy-dynamic/index.ts"),
+          {
+            experimental: { disableExperimentalWarning: true },
+          },
+        );
+      });
+
+      afterEach(async () => {
+        await worker.stop();
+      });
+
+      it("should work with byName", async () => {
+        const roomId = Array.from({ length: 10 }).map(() =>
+          Math.random().toString(36).slice(2),
+        );
+
+        for (const id of roomId) {
+          const resp = await worker.fetch(`/room/${id}`);
+          expect(resp.status).toBe(200);
+          expect(await resp.text()).toBe(id);
+        }
+      });
+    });
+  });
 });
