@@ -28,9 +28,8 @@ export function generateHonoObject<
     ...handlers,
   };
 
-  const app = new Hono<E, S, BasePath>().basePath(basePath);
-
   const honoObject = function (this, state) {
+    const app = new Hono<E, S, BasePath>().basePath(basePath);
     this.app = app;
     this.state = state;
     this.vars = {};

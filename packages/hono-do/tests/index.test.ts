@@ -145,4 +145,33 @@ describe("Worker", () => {
       expect(await resp2.text()).toBe("Hello, Hono DO!");
     });
   });
+
+  describe("Dynamic Entry", () => {
+    let worker: UnstableDevWorker;
+
+    beforeEach(async () => {
+      worker = await unstable_dev(
+        join(__dirname, "fixtures/dynamic-entry/index.ts"),
+        {
+          experimental: { disableExperimentalWarning: true },
+        },
+      );
+    });
+
+    afterEach(async () => {
+      await worker.stop();
+    });
+
+    it("should work with multi entry", async () => {
+      const roomId = Array.from({ length: 10 }).map(() =>
+        Math.random().toString(36).slice(2),
+      );
+
+      for (const id of roomId) {
+        const resp = await worker.fetch(`/room/${id}`);
+        expect(resp.status).toBe(200);
+        expect(await resp.text()).toBe(id);
+      }
+    });
+  });
 });
