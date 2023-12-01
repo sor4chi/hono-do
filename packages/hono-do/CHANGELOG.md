@@ -1,5 +1,11 @@
 # hono-do
 
+## 1.0.1
+
+### Patch Changes
+
+- [#26](https://github.com/sor4chi/hono-do/pull/26) [`bdb39b9`](https://github.com/sor4chi/hono-do/commit/bdb39b9f26d9fb6df859f24bf49c401f7665a816) Thanks [@sor4chi](https://github.com/sor4chi)! - Fixed a bug that caused an error when a duplicate route was registered when the basepath of HonoObject was dynamic.
+
 ## 1.0.0
 
 ### Major Changes

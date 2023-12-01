@@ -1,7 +1,7 @@
 {
   "name": "hono-do-example-chat",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
     "lint:check": "eslint --ext .ts,.tsx src",
