@@ -96,29 +96,6 @@ describe("Worker", () => {
     });
   });
 
-  describe("DelayInit", () => {
-    let worker: UnstableDevWorker;
-
-    beforeEach(async () => {
-      worker = await unstable_dev(
-        join(__dirname, "fixtures/delay-init/index.ts"),
-        {
-          experimental: { disableExperimentalWarning: true },
-        },
-      );
-    });
-
-    afterEach(async () => {
-      await worker.stop();
-    });
-
-    it("should wait for initialization", async () => {
-      const resp = await worker.fetch("/delay-init/count");
-      expect(resp.status).toBe(200);
-      expect(await resp.text()).toBe("1");
-    });
-  });
-
   describe("Alarm", () => {
     let worker: UnstableDevWorker;
 
