@@ -1,5 +1,28 @@
 # hono-do
 
+## 1.1.0
+
+### Minor Changes
+
+- [#31](https://github.com/sor4chi/hono-do/pull/31) [`44c46e2`](https://github.com/sor4chi/hono-do/commit/44c46e2c641e0f6cf5b962adfda651e963d3cfd7) Thanks [@sor4chi](https://github.com/sor4chi)! - feat: enable to get bindings env from vars
+
+  ```ts
+  import { generateHonoObject } from "hono-do";
+
+  type Env = {
+    Bindings: {
+      KV: KVNamespace;
+    };
+  };
+
+  export const Batcher = generateHonoObject<Env>(
+    "/",
+    async (app, state, vars) => {
+      vars.env.KV; // KVNamespace
+    },
+  );
+  ```
+
 ## 1.0.1
 
 ### Patch Changes

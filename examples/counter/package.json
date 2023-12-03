@@ -1,7 +1,7 @@
 {
   "name": "hono-do-example-counter",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "lint": "eslint --fix --ext .ts,.tsx src",
     "lint:check": "eslint --ext .ts,.tsx src",
