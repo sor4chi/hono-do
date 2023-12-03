@@ -11,7 +11,9 @@ interface HonoObjectState<
 > {
   app: Hono<E, S, BasePath>;
   state: DurableObjectState;
-  vars: HonoObjectVars;
+  vars: HonoObjectVars & {
+    env: E["Bindings"];
+  };
 }
 
 export interface HonoObject<
@@ -19,44 +21,48 @@ export interface HonoObject<
   S extends Schema = Record<string, never>,
   BasePath extends string = "/",
 > extends HonoObjectState<E, S, BasePath> {
-  (this: HonoObject<E, S, BasePath>, state: DurableObjectState): void;
-  alarm: (handler: AlarmHandler) => HonoObject<E, S, BasePath>;
+  (
+    this: HonoObject<E, S, BasePath>,
+    state: DurableObjectState,
+    env: E["Bindings"],
+  ): void;
+  alarm: (handler: AlarmHandler<E>) => HonoObject<E, S, BasePath>;
   webSocketMessage: (
-    handler: WebSocketMessageHandler,
+    handler: WebSocketMessageHandler<E>,
   ) => HonoObject<E, S, BasePath>;
   webSocketClose: (
-    handler: WebSocketCloseHandler,
+    handler: WebSocketCloseHandler<E>,
   ) => HonoObject<E, S, BasePath>;
   webSocketError: (
-    handler: WebSocketErrorHandler,
+    handler: WebSocketErrorHandler<E>,
   ) => HonoObject<E, S, BasePath>;
 }
 
-export type AlarmHandler = (
+export type AlarmHandler<E extends Env = Env> = (
   ...args: MergeArray<
     Parameters<NonNullable<DurableObject["alarm"]>>,
-    [state: DurableObjectState, vars: HonoObjectVars]
+    [state: DurableObjectState, vars: HonoObjectVars & { env: E["Bindings"] }]
   >
 ) => ReturnType<NonNullable<DurableObject["alarm"]>>;
 
-export type WebSocketMessageHandler = (
+export type WebSocketMessageHandler<E extends Env = Env> = (
   ...args: MergeArray<
     Parameters<NonNullable<DurableObject["webSocketMessage"]>>,
-    [state: DurableObjectState, vars: HonoObjectVars]
+    [state: DurableObjectState, vars: HonoObjectVars & { env: E["Bindings"] }]
   >
 ) => ReturnType<NonNullable<DurableObject["webSocketMessage"]>>;
 
-export type WebSocketCloseHandler = (
+export type WebSocketCloseHandler<E extends Env = Env> = (
   ...args: MergeArray<
     Parameters<NonNullable<DurableObject["webSocketClose"]>>,
-    [state: DurableObjectState, vars: HonoObjectVars]
+    [state: DurableObjectState, vars: HonoObjectVars & { env: E["Bindings"] }]
   >
 ) => ReturnType<NonNullable<DurableObject["webSocketClose"]>>;
 
-export type WebSocketErrorHandler = (
+export type WebSocketErrorHandler<E extends Env = Env> = (
   ...args: MergeArray<
     Parameters<NonNullable<DurableObject["webSocketError"]>>,
-    [state: DurableObjectState, vars: HonoObjectVars]
+    [state: DurableObjectState, vars: HonoObjectVars & { env: E["Bindings"] }]
   >
 ) => ReturnType<NonNullable<DurableObject["webSocketError"]>>;
 
