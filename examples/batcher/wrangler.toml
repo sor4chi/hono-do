@@ -7,3 +7,9 @@ bindings = [{ name = "BATCHER", class_name = "Batcher" }]
 [[migrations]]
 tag = "v1"
 new_classes = ["Batcher"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "batch-db"
+database_id = "ae9d3bb9-d843-4fab-9387-7aed0ad5b92b"
+preview_database_id = "DB"

@@ -1,10 +1,13 @@
 import { Hono } from "hono";
 
-const app = new Hono<{
+export interface Env {
   Bindings: {
     BATCHER: DurableObjectNamespace;
+    DB: D1Database;
   };
-}>();
+}
+
+const app = new Hono<Env>();
 
 app.all("/batcher/*", (c) => {
   const id = c.env.BATCHER.idFromName("Batcher");

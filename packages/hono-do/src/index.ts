@@ -20,7 +20,7 @@ export function generateHonoObject<
   cb: (
     app: Hono<E, S, BasePath>,
     state: DurableObjectState,
-    vars: HonoObjectVars,
+    vars: HonoObjectVars & { env: E["Bindings"] },
   ) => void | Promise<void>,
   handlers: HonoObjectHandlers = {},
 ) {
@@ -28,11 +28,13 @@ export function generateHonoObject<
     ...handlers,
   };
 
-  const honoObject = function (this, state) {
+  const honoObject = function (this, state, env) {
     const app = new Hono<E, S, BasePath>().basePath(basePath);
     this.app = app;
     this.state = state;
-    this.vars = {};
+    this.vars = {
+      env,
+    };
     state.blockConcurrencyWhile(async () => {
       await cb(app, state, this.vars);
     });

@@ -21,7 +21,8 @@ describe("generateHonoObject", () => {
       Bindings: {
         HOGE_DB: D1Database;
       };
-    }>("/", (app) => {
+    }>("/", (app, _, vars) => {
+      expectTypeOf(vars.env.HOGE_DB).toEqualTypeOf<D1Database>();
       app.get("/hoge", async (c) => {
         expectTypeOf(c.var.HOGE_VAR).toEqualTypeOf<string>();
         expectTypeOf(c.env.HOGE_DB).toEqualTypeOf<D1Database>();
