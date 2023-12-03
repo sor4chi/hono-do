@@ -39,6 +39,20 @@ describe("generateHonoObject", () => {
     });
   });
 
+  it("should work with type-safe base path, with empty path", async () => {
+    type AppEnv = {
+      Bindings: {
+        HOGE_DB: D1Database;
+      };
+    };
+
+    generateHonoObject<AppEnv>("/hoge", (app) => {
+      expectTypeOf(app).toEqualTypeOf<
+        Hono<AppEnv, Record<string, never>, "/hoge">
+      >();
+    });
+  });
+
   it("should work with handler chain by flat way", async () => {
     const DO = generateHonoObject("/", () => {});
     DO.alarm(async () => {});
