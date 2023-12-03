@@ -8,7 +8,6 @@
     "format:check": "turbo format:check",
     "build": "turbo build",
     "test": "turbo test",
-    "test:type": "turbo test:type",
     "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
