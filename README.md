@@ -43,3 +43,4 @@ You want to find more? Check out the [examples](./examples)!
 ## Contributing
 
 This project is open for contributions. Feel free to open an issue or a pull request!
+[Contributing Guide](./CONTRIBUTING.md) for more information.
