@@ -1,5 +1,12 @@
 # hono-do-example-batcher
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`44c46e2`](https://github.com/sor4chi/hono-do/commit/44c46e2c641e0f6cf5b962adfda651e963d3cfd7)]:
+  - hono-do@1.1.0
+
 ## 0.0.4
 
 ### Patch Changes
