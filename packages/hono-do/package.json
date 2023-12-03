@@ -11,8 +11,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "build": "tsc -p tsconfig.build.json",
-    "test": "vitest",
-    "test:type": "vitest typecheck"
+    "test": "vitest run",
+    "test:type": "vitest typecheck run"
   },
   "keywords": [
     "hono",
