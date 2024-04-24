@@ -61,8 +61,8 @@ importers:
         version: link:../../packages/hono-do
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230821.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
       wrangler:
         specifier: ^3.7.0
         version: 3.8.0
@@ -77,8 +77,8 @@ importers:
         version: link:../../packages/hono-do
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230821.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
       wrangler:
         specifier: ^3.7.0
         version: 3.8.0
@@ -93,8 +93,8 @@ importers:
         version: link:../../packages/hono-do
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230821.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
       wrangler:
         specifier: ^3.7.0
         version: 3.8.0
@@ -109,8 +109,8 @@ importers:
         version: link:../../packages/hono-do
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230821.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
       wrangler:
         specifier: ^3.7.0
         version: 3.8.0
@@ -125,8 +125,8 @@ importers:
         version: link:../../packages/hono-do
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230821.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
       wrangler:
         specifier: ^3.7.0
         version: 3.8.0
@@ -138,8 +138,8 @@ importers:
         version: 3.6.0
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20230904.0
-        version: 4.20230904.0
+        specifier: ^4.20240423.0
+        version: 4.20240423.0
 
 packages:
 
@@ -431,8 +431,8 @@ packages:
     dev: true
     optional: true
 
-  /@cloudflare/workers-types@4.20230904.0:
-    resolution: {integrity: sha512-IX4oJCe14ctblSPZBlW64BVZ9nYLUo6sD2I5gu3hX0ywByYWm1OuoKm9Xb/Zpbj8Ph18Z7Ryii6u2/ocnncXdA==}
+  /@cloudflare/workers-types@4.20240423.0:
+    resolution: {integrity: sha512-ssuccb3j+URp6mP2p0PcQE9vmS3YeKBQnALHF9P3yQfUAFozuhTsDTbqmL+zPrJvUcG7SL2xVQkNDF9QJeKDZw==}
     dev: true
 
   /@esbuild-plugins/node-globals-polyfill@0.2.3(esbuild@0.17.19):

@@ -15,7 +15,7 @@
     "hono-do": "workspace:*"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230821.0",
+    "@cloudflare/workers-types": "^4.20240423.0",
     "wrangler": "^3.7.0"
   }
 }
