@@ -134,8 +134,8 @@ importers:
   packages/hono-do:
     dependencies:
       hono:
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^4.2.7
+        version: 4.2.7
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20230904.0
@@ -2487,6 +2487,11 @@ packages:
 
   /hono@3.6.0:
     resolution: {integrity: sha512-snkW8naO1WCrQvpAGE/du30Ek0h71gSM3g4RzzdPIB2LQnl12BEwZYH3s2Kssd6kXGORqHmpoyMBMLWtc9nzKQ==}
+    engines: {node: '>=16.0.0'}
+    dev: false
+
+  /hono@4.2.7:
+    resolution: {integrity: sha512-k1xHi86tJnRIVvqhFMBDGFKJ8r5O+bEsT4P59ZK59r0F300Xd910/r237inVfuT/VmE86RQQffX4OYNda6dLXw==}
     engines: {node: '>=16.0.0'}
     dev: false
 
