@@ -1,5 +1,11 @@
 # hono-do
 
+## 1.2.0
+
+### Minor Changes
+
+- [`a27936f`](https://github.com/sor4chi/hono-do/commit/a27936ffc1f970aaea67c8c5b9370f95e3b3e5d3) Thanks [@sor4chi](https://github.com/sor4chi)! - Updated the version of the dependency 'hono' to 4.2.7.
+
 ## 1.1.0
 
 ### Minor Changes
