@@ -1,5 +1,12 @@
 # hono-do-example-counter
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`a27936f`](https://github.com/sor4chi/hono-do/commit/a27936ffc1f970aaea67c8c5b9370f95e3b3e5d3)]:
+  - hono-do@1.2.0
+
 ## 0.0.6
 
 ### Patch Changes
