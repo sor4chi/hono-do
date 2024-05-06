@@ -12,7 +12,7 @@
     "create-db": "wrangler d1 create batch-db"
   },
   "dependencies": {
-    "hono": "^3.6.0",
+    "hono": "^4.2.7",
     "hono-do": "workspace:*"
   },
   "devDependencies": {
