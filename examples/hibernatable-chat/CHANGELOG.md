@@ -1,5 +1,12 @@
 # hono-do-example-hibernatable-chat
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`a27936f`](https://github.com/sor4chi/hono-do/commit/a27936ffc1f970aaea67c8c5b9370f95e3b3e5d3)]:
+  - hono-do@2.0.0
+
 ## 0.0.3
 
 ### Patch Changes
