@@ -1,5 +1,6 @@
 ---
-"hono-do": minor
+"hono-do": major
 ---
 
-Updated the version of the dependency 'hono' to 4.2.7.
+Updated the version of the dependency 'hono' to 4.x.
+
