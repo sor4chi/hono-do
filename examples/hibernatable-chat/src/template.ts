@@ -102,4 +102,4 @@ export const Template = html`
       </script>
     </body>
   </html>
-`.trim();
+`;

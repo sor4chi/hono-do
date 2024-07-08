@@ -1,13 +1,5 @@
 import { generateHonoObject } from "hono-do";
 
-function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0,
-      v = c == "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
-
 declare module "hono-do" {
   interface HonoObjectVars {
     messages: {
@@ -31,7 +23,7 @@ export const Chat = generateHonoObject("/chat", (app, state, vars) => {
 
   async function handleWebSocketUpgrade() {
     const [client, server] = Object.values(new WebSocketPair());
-    const clientId = uuidv4();
+    const clientId = crypto.randomUUID();
     state.acceptWebSocket(server);
 
     server.serializeAttachment({ clientId });
